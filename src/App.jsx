@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+
 function App() {
   const [courseId, setCourseId] = useState('math-2305-123');
   const [data, setData] = useState(null);
@@ -10,14 +11,14 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://gkumnvexpe.execute-api.us-east-1.amazonaws.com/dev/', {
-        method: 'POST', 
+      //https://gkumnvexpe.execute-api.us-east-1.amazonaws.com/dev/get/superdocs
+      const endpoint  = `${import.meta.env.VITE_LAMBDA_ENDPOINT}/superdocs?courseId=${courseId}`
+      const response = await fetch(endpoint, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          courseId: courseId 
-        })
+        
       });
 
       if (!response.ok) {
